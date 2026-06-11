@@ -394,6 +394,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   width: 84px; height: 84px; z-index: 0; pointer-events: none;
   background-image: var(--logo); background-repeat: no-repeat;
   background-position: center; background-size: contain; opacity: .9;
+  border-radius: 16px;
 }
 .entry.logo-big .when::after { width: 104px; height: 104px; }
 .entry.logo-shift { padding-left: 112px; }
@@ -403,6 +404,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   width: 88px; height: 88px; z-index: 0; pointer-events: none;
   background-image: var(--logo); background-repeat: no-repeat;
   background-position: center; background-size: contain; opacity: .9;
+  border-radius: 16px;
 }
 @media (max-width: 600px) {
   .entry.has-logo .when { display: flex; align-items: center; gap: 10px; padding-top: 0; }
@@ -683,7 +685,19 @@ footer.titleblock { margin-top: 64px; padding: 0 0 40px; font-family: var(--mono
 }
 .map-head b { color: var(--accent-strong); }
 .journey { display: block; width: 100%; height: auto; aspect-ratio: 900 / 380; }
+.journey .land {
+  fill: color-mix(in srgb, var(--accent) 6%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 34%, transparent);
+  stroke-width: .8;
+}
+html.dark .journey .land {
+  fill: color-mix(in srgb, var(--accent) 9%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 40%, transparent);
+}
 .journey .grat { stroke: var(--grid-major); stroke-width: 1; }
+.journey .route-dot { fill: var(--ok); opacity: 0; transition: opacity .6s ease 3.2s; }
+.journey.drawn .route-dot { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .journey .route-dot { display: none; } }
 .journey .route {
   fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 6 5;
   opacity: .9;
@@ -784,6 +798,13 @@ main { animation: pageEnter .34s cubic-bezier(.2,.8,.2,1) both; }
   .scroll-cue::after, .now-dot, .xh-loader span, .ldr-label { animation: none; }
   .journey.drawn .route { animation: none; stroke-dashoffset: 0; }
 }
+
+/* ---------- Scrollbar (matches the sheet) ---------- */
+html { scrollbar-width: thin; scrollbar-color: var(--line) var(--paper); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--line); border: 2px solid var(--paper); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* ---------- Print (CV) ---------- */
 @media print {

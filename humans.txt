@@ -1,0 +1,15 @@
+/* TEAM */
+Drawn by: Gihyun Kim
+Site: kim-gihyun.github.io
+Contact: ghkim1106 [at] connect.hku.hk
+Location: Hong Kong / Seoul
+
+/* SITE */
+Identity: a personal engineering drawing set, sheets 01-06
+Stack: hand-written HTML/CSS/JS, three.js for the models
+Fonts: Lora, Inter, IBM Plex Mono
+Last revised: June 2026, REV C
+
+/* NOTE */
+If you found this file, you read drawings closely.
+We would probably get along.

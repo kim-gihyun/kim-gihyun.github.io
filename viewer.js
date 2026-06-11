@@ -154,7 +154,8 @@ function initViewer(stage, THREE, gl, oc, env, reduced) {
     const yawSafe = (Math.max(Math.hypot(fitSize.x, fitSize.z), fitSize.y) * 0.5) || 1;
     const radius = mouseMode ? yawSafe : sphere;
     const fov = cam.fov * Math.PI / 180;
-    const dist = (radius / Math.sin(fov / 2)) * (mouseMode ? 0.98 : 0.9);
+    const zoom = parseFloat(stage.getAttribute('data-zoom')) || 1;
+    const dist = (radius / Math.sin(fov / 2)) * (mouseMode ? 0.98 : 0.9) / zoom;
     const az = mouseMode ? 0 : 0.6;
     cam.position.set(fitCenter.x + Math.sin(az) * dist, fitCenter.y + radius * 0.32, fitCenter.z + Math.cos(az) * dist);
     cam.near = Math.max(dist / 100, 0.001);

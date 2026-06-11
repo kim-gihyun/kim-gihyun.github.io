@@ -5,6 +5,18 @@
   document.documentElement.classList.add('js');
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // for the curious — hello from the title block
+  try {
+    console.log(
+      '%c┌──────────────────────────────────┐\n' +
+      '│  GK ENGINEERING — DRAWING SET    │\n' +
+      '│  DRAWN BY: G. KIM   ·   REV C    │\n' +
+      '│  ghkim1106@connect.hku.hk        │\n' +
+      '└──────────────────────────────────┘',
+      'font: 600 11px/1.5 monospace; color: #1d4e89;'
+    );
+  } catch (e) {}
+
   // Fix blank screen on Back / bfcache
   window.addEventListener('pageshow', function () { document.body.classList.remove('page-leaving'); });
 
@@ -48,7 +60,8 @@
     dock.innerHTML = items.map(function (it) {
       var active = (path === it[0] || (path === '' && it[0] === 'index.html') ||
                     (path === 'post.html' && it[0] === 'blog.html')) ? ' active' : '';
-      return '<a class="dock-link' + active + '" href="' + it[0] + '" aria-label="' + it[2] + '">' +
+      return '<a class="dock-link' + active + '" href="' + it[0] + '" aria-label="' + it[2] + '"' +
+        (active ? ' aria-current="page"' : '') + '>' +
         it[1] + '<span class="dock-label">' + it[1] + ' &middot; ' + it[2] + '</span></a>';
     }).join('');
     var themeBtn = document.createElement('button');
@@ -66,6 +79,41 @@
 
     var glow = document.createElement('div');
     glow.className = 'grid-glow'; document.body.appendChild(glow);
+
+    // halo of drafting crosses at grid intersections around the cursor
+    var xf = document.createElement('canvas');
+    xf.style.cssText = 'position:fixed;inset:0;z-index:-1;pointer-events:none;';
+    document.body.appendChild(xf);
+    var xfCtx = xf.getContext('2d');
+    var xfColor = '29,78,137';
+    function xfTheme() {
+      xfColor = document.documentElement.classList.contains('dark') ? '89,166,240' : '29,78,137';
+    }
+    xfTheme(); themePainters.push(xfTheme);
+    function xfSize() { xf.width = window.innerWidth; xf.height = window.innerHeight; }
+    xfSize(); window.addEventListener('resize', xfSize);
+    var XF_R = 170, GRID = 28;
+    function xfDraw(cx, cy) {
+      xfCtx.clearRect(0, 0, xf.width, xf.height);
+      if (cx < 0) return;
+      var x0 = Math.max(0, Math.floor((cx - XF_R) / GRID) * GRID - 1);
+      var y0 = Math.max(0, Math.floor((cy - XF_R) / GRID) * GRID - 1);
+      for (var gx = x0; gx <= cx + XF_R; gx += GRID) {
+        for (var gy = y0; gy <= cy + XF_R; gy += GRID) {
+          var d = Math.hypot(gx - cx, gy - cy);
+          if (d > XF_R) continue;
+          var a = (1 - d / XF_R);
+          a = a * a * 0.55;
+          var s = 2.4 + a * 4;
+          xfCtx.strokeStyle = 'rgba(' + xfColor + ',' + a.toFixed(3) + ')';
+          xfCtx.lineWidth = 1;
+          xfCtx.beginPath();
+          xfCtx.moveTo(gx - s, gy); xfCtx.lineTo(gx + s, gy);
+          xfCtx.moveTo(gx, gy - s); xfCtx.lineTo(gx, gy + s);
+          xfCtx.stroke();
+        }
+      }
+    }
 
     var xc = document.createElement('div');
     xc.className = 'xcur'; xc.setAttribute('aria-hidden', 'true');
@@ -97,6 +145,7 @@
                            '  Y ' + String(Math.max(0, Math.round(my))).padStart(4, '0');
       rootStyle.setProperty('--mx', mx + 'px');
       rootStyle.setProperty('--my', my + 'px');
+      xfDraw(mx, my);
       if (boxEl) {
         var r = boxEl.getBoundingClientRect();
         xcBox.style.transform = 'translate(' + (r.left - 6) + 'px,' + (r.top - 6) + 'px)';
@@ -113,6 +162,7 @@
     }, { passive: true });
     document.addEventListener('mouseleave', function () {
       document.documentElement.classList.remove('xcur-on');
+      xfDraw(-1, -1);
     });
     document.addEventListener('mouseover', function (e) {
       var t = e.target.closest ? e.target.closest(LOCK_SEL) : null;

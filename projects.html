@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f8f6" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f1722" media="(prefers-color-scheme: dark)" />
   <title>Projects — Gihyun Kim</title>
   <meta name="description" content="Engineering projects by Gihyun Kim — robotics, mechanical design, and prototyping." />
   <meta property="og:type" content="website" />
@@ -16,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');}catch(e){}})();</script>
-  <link rel="stylesheet" href="style.css?v=51" />
+  <link rel="stylesheet" href="style.css?v=52" />
 </head>
 <body>
 
@@ -66,7 +68,7 @@
           <h3 class="ptile-title">Robocon Mini-Competition Robot</h3>
           <span class="ptile-rev">REV C</span>
         </div>
-        <div class="model-stage ptile-stage" data-model="assets/robot.glb" data-rx="0" data-ry="210" aria-label="Interactive 3D model of the Robocon robot">
+        <div class="model-stage ptile-stage" data-model="assets/robot.glb" data-rx="0" data-ry="210" data-zoom="1.5" aria-label="Interactive 3D model of the Robocon robot">
           <img class="robot-fallback" src="assets/robocon-robot-1.png" alt="Robocon robot CAD" />
           <span class="robot-hint">drag to rotate</span>
         </div>
@@ -211,7 +213,7 @@
     </div>
   </footer>
 
-  <script src="main.js?v=51"></script>
+  <script src="main.js?v=52"></script>
   <script type="importmap">
   {
     "imports": {
@@ -220,6 +222,6 @@
     }
   }
   </script>
-  <script type="module" src="viewer.js?v=20"></script>
+  <script type="module" src="viewer.js?v=21"></script>
 </body>
 </html>

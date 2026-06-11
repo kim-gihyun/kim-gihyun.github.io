@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f8f6" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f1722" media="(prefers-color-scheme: dark)" />
   <title>Log — Gihyun Kim</title>
   <meta name="description" content="Engineering log — research progress and notes by Gihyun Kim." />
   <meta property="og:type" content="website" />
@@ -16,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');}catch(e){}})();</script>
-  <link rel="stylesheet" href="style.css?v=51" />
+  <link rel="stylesheet" href="style.css?v=52" />
 </head>
 <body>
 
@@ -69,7 +71,7 @@
     </div>
   </footer>
 
-  <script src="main.js?v=51"></script>
+  <script src="main.js?v=52"></script>
   <script>
     fetch("posts.json")
       .then(function (r) { return r.json(); })
@@ -81,7 +83,7 @@
         posts.sort(function (a, b) { return b.date.localeCompare(a.date); });
 
         var list = document.getElementById("post-list");
-        if (!posts.length) { list.innerHTML = '<li class="empty">No entries yet.</li>'; return; }
+        if (!posts.length) { list.innerHTML = '<li class="empty">No entries yet — first sheet still on the board.</li>'; return; }
         list.innerHTML = posts.map(function (p) {
           var tags = (p.tags || []).map(function (t) { return '<span class="tag-pill">' + escapeHtml(t) + '</span>'; }).join("");
           var url = "post.html?p=" + encodeURIComponent(p.file);
