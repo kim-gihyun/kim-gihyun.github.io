@@ -752,8 +752,8 @@ html.dark .journey .land {
 /* a little aircraft symbol, forever flying the route */
 .journey .route-craft { opacity: 0; transition: opacity .6s ease 3.2s; }
 .journey.drawn .route-craft { opacity: 1; }
-.journey .route-craft path { fill: var(--accent-strong); }
-.journey .route-craft .craft-trail { fill: none; stroke: var(--accent-strong); stroke-width: 1; opacity: .45; }
+.journey .route-craft path { fill: var(--ok); }
+.journey .route-craft .craft-trail { fill: none; stroke: var(--ok); stroke-width: 1; opacity: .5; }
 @media (prefers-reduced-motion: reduce) { .journey .route-craft { display: none; } }
 .journey .route {
   fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 6 5;
