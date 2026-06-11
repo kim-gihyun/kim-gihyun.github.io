@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Gihyun Kim</title>
+  <meta name="description" content="Engineering projects by Gihyun Kim — robotics, mechanical design, and prototyping." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Projects — Gihyun Kim" />
+  <meta property="og:description" content="Robotics and mechanical design projects: Robocon robot, laundry sensor, transport trolley, solar tracker." />
+  <meta property="og:image" content="https://kim-gihyun.github.io/assets/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:image" content="https://kim-gihyun.github.io/assets/og-card.png" />
+  <meta property="og:url" content="https://kim-gihyun.github.io/projects.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');}catch(e){}})();</script>
+  <link rel="stylesheet" href="style.css?v=51" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="tb-inner">
+      <a class="brand" href="index.html">Gihyun Kim <span class="brand-sub">Drawing set &middot; rev. 2026</span></a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html"><i>01</i>Home</a>
+        <a href="about.html"><i>02</i>About</a>
+        <a href="cv.html"><i>03</i>CV</a>
+        <a href="projects.html" class="active"><i>04</i>Projects</a>
+        <a href="personal.html"><i>05</i>Personal</a>
+        <a href="blog.html"><i>06</i>Log</a>
+        <button class="theme-btn" type="button" aria-label="Toggle dark mode"></button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="page-head reveal">
+      <p class="eyebrow">Sheet 04 &middot; Drawing index</p>
+      <h1>Projects</h1>
+      <p class="sub">Four builds — drawn, machined, printed, and assembled. Drag a model to rotate it;
+         open a card for the full sheet, including its revision history.</p>
+    </header>
+
+    <div class="proj-filters" id="proj-filters" role="group" aria-label="Filter projects">
+      <button class="pf-btn active" data-filter="all">All <i>4</i></button>
+      <button class="pf-btn" data-filter="robotics">Robotics <i>3</i></button>
+      <button class="pf-btn" data-filter="cad">CAD <i>3</i></button>
+      <button class="pf-btn" data-filter="embedded">Embedded <i>2</i></button>
+      <button class="pf-btn" data-filter="personal">Personal <i>1</i></button>
+    </div>
+
+    <div class="ptiles" id="ptiles">
+
+      <!-- 001 -->
+      <article class="ptile reveal" role="button" tabindex="0"
+        data-cat="robotics cad" data-id="PRJ-01"
+        data-tag="HKU Robocon Team" data-title="Robocon Mini-Competition Robot"
+        data-role="Mechanical design &amp; fabrication" data-year="2025"
+        data-stack="SolidWorks &middot; Waterjet &middot; Laser-cut acrylic &middot; Pneumatics" data-status="Built &amp; competed"
+        data-revs="A|Gripper and rear-panel concept modelled in SolidWorks|2025;;B|Load-bearing parts waterjet-cut; panels in laser-cut acrylic|2025;;C|Pneumatics integrated; competed under match conditions|2025">
+        <div class="ptile-top">
+          <span class="ptile-num">PRJ-01</span>
+          <h3 class="ptile-title">Robocon Mini-Competition Robot</h3>
+          <span class="ptile-rev">REV C</span>
+        </div>
+        <div class="model-stage ptile-stage" data-model="assets/robot.glb" data-rx="0" data-ry="210" aria-label="Interactive 3D model of the Robocon robot">
+          <img class="robot-fallback" src="assets/robocon-robot-1.png" alt="Robocon robot CAD" />
+          <span class="robot-hint">drag to rotate</span>
+        </div>
+        <p class="ptile-desc">Grippers and a rear panel for HKU Robocon — CAD through waterjet and laser fabrication, with pneumatics in the final build.</p>
+        <div class="ptile-tb">
+          <span><i>Year</i>2025</span>
+          <span><i>Role</i>Mech. design &amp; fab</span>
+          <span><i>Status</i>Built &amp; competed</span>
+        </div>
+        <div class="proj-detail" hidden>
+          <p>For HKU Robocon's internal mini-competition, the robot had to pick up and place game elements quickly and reliably under timed match conditions. I led the mechanical design and fabrication of its manipulation system — two front grippers and a rear panel.</p>
+          <p>I modelled the parts in CAD, then fabricated each with the process that suited it: waterjet for the load-bearing pieces and laser-cut acrylic for the lighter structural panels. After machining, I hand-assembled the grippers and panel into a working mechanism and tuned the fit between parts.</p>
+          <p>The final build integrated pneumatics alongside the existing electrical systems, so I designed around actuator stroke, mounting points, and air-line routing to keep the assembly compact and serviceable.</p>
+        </div>
+        <div class="proj-gallery" hidden>
+          <img src="assets/robocon-robot-1.png" alt="Robocon robot CAD" />
+          <img src="assets/robocon-robot-2.png" alt="Robocon robot CAD — alternate view" />
+          <img src="assets/robocon-assembled.png" alt="Assembled Robocon robot with pneumatics" />
+        </div>
+      </article>
+
+      <!-- 002 -->
+      <article class="ptile reveal" role="button" tabindex="0"
+        data-cat="embedded cad" data-id="PRJ-02"
+        data-tag="Shun Hing College Tech Club" data-title="Laundry Availability Sensor"
+        data-role="Embedded enclosure design" data-year="2025"
+        data-stack="ESP32 &middot; Light sensor &middot; Fusion 360 &middot; FDM 3D print" data-status="Deployed in dorm"
+        data-revs="A|Single-piece printed casing — hard to print, awkward to assemble|2025;;B|Redesigned as two casings that print cleanly and snap together|2025;;C|Deployed in the dorm laundry room, reporting to the web|2025">
+        <div class="ptile-top">
+          <span class="ptile-num">PRJ-02</span>
+          <h3 class="ptile-title">Laundry Availability Sensor</h3>
+          <span class="ptile-rev">REV C</span>
+        </div>
+        <div class="model-stage ptile-stage" data-model="assets/laundry.glb" data-rx="0" data-ry="0" aria-label="Interactive 3D model of the laundry sensor enclosure">
+          <img class="robot-fallback" src="assets/laundry-final.png" alt="Laundry sensor enclosure CAD" />
+          <span class="robot-hint">drag to rotate</span>
+        </div>
+        <p class="ptile-desc">A 3D-printed enclosure for an ESP32 and light sensor that reports laundry-machine availability to a web page.</p>
+        <div class="ptile-tb">
+          <span><i>Year</i>2025</span>
+          <span><i>Role</i>Enclosure design</span>
+          <span><i>Status</i>Deployed in dorm</span>
+        </div>
+        <div class="proj-detail" hidden>
+          <p>At Shun Hing College's Tech Club, we built a device that detects whether a laundry machine is in use and reports its availability to a website, so residents can check before walking over. My responsibility was the physical enclosure housing the ESP32 microcontroller and the light sensor it uses to read the machine's status indicator.</p>
+          <p>I started with a single-piece printed casing, but it was difficult to print accurately and awkward to assemble around the electronics. I redesigned it into two separate casings that print cleanly on their own and fit together reliably — a change that noticeably improved our rapid-prototyping turnaround.</p>
+          <p>The result is a compact, reproducible housing that protects the electronics while leaving the sensor a clear line of sight to the machine.</p>
+        </div>
+        <div class="proj-gallery" hidden>
+          <img src="assets/laundry-initial.png" alt="Initial single-piece casing CAD" />
+          <img src="assets/laundry-final.png" alt="Final two-piece casing CAD" />
+        </div>
+      </article>
+
+      <!-- 003 -->
+      <article class="ptile reveal" role="button" tabindex="0"
+        data-cat="cad robotics" data-id="PRJ-03"
+        data-tag="HKU Robocon Team" data-title="Robocon Transport Trolley"
+        data-role="Parametric assembly design" data-year="2026"
+        data-stack="SolidWorks (parametric) &middot; FDM 3D print" data-status="Built &amp; in use"
+        data-revs="A|Parametric top &amp; bottom subassemblies, shared driving dimensions|2026;;B|3D-printed corner mounts added to lock each robot in place|2026;;C|In service — workshop-to-venue transport for ABU Robocon|2026">
+        <div class="ptile-top">
+          <span class="ptile-num">PRJ-03</span>
+          <h3 class="ptile-title">Robocon Transport Trolley</h3>
+          <span class="ptile-rev">REV C</span>
+        </div>
+        <div class="model-stage ptile-stage" data-model="assets/trolley.glb" aria-label="Interactive 3D model of the transport trolley">
+          <img class="robot-fallback" src="assets/trolley.png" alt="Robocon trolley CAD assembly" />
+          <span class="robot-hint">drag to rotate</span>
+        </div>
+        <p class="ptile-desc">A parametric transport trolley for ABU Robocon, with 3D-printed corner mounts that lock each robot in place.</p>
+        <div class="ptile-tb">
+          <span><i>Year</i>2026</span>
+          <span><i>Role</i>Parametric design</span>
+          <span><i>Status</i>Built &amp; in use</span>
+        </div>
+        <div class="proj-detail" hidden>
+          <p>The HKU team needed to move its competition robots safely between the workshop and the venue for ABU Robocon, so I designed a dedicated transport trolley sized around the robots it carries.</p>
+          <p>I built the trolley parametrically: top and bottom subassemblies driven by shared, editable dimensions, which I then combined into the final assembly. Working this way meant adjusting one key dimension propagated cleanly through the whole model instead of forcing manual rework.</p>
+          <p>To keep the robots from shifting in transit, I positioned 3D-printed mountings at all four top corners that locate and lock each robot in place — a simple, printable solution that holds up to real handling.</p>
+        </div>
+        <div class="proj-gallery" hidden>
+          <img src="assets/trolley.png" alt="Robocon trolley CAD assembly" />
+          <img src="assets/trolley-mount.png" alt="3D-printed corner mounting" />
+          <img src="assets/trolley-built.jpg" alt="Assembled trolley" />
+        </div>
+      </article>
+
+      <!-- 004 -->
+      <article class="ptile reveal" role="button" tabindex="0"
+        data-cat="robotics embedded personal" data-id="PRJ-04"
+        data-tag="Personal Project" data-title="Dual-Axis Solar Tracker"
+        data-role="Mechatronics — CAD + control" data-year="2026"
+        data-stack="Raspberry Pi &middot; 2&times; servo &middot; Photoresistors &middot; 3D-printed frame" data-status="Working prototype"
+        data-revs="A|Structural frame printed; first full assembly|2026;;B|Motor-mount clearance opened; wire-routing holes added|2026;;C|Gear engagement refined — smooth, repeatable two-axis motion|2026">
+        <div class="ptile-top">
+          <span class="ptile-num">PRJ-04</span>
+          <h3 class="ptile-title">Dual-Axis Solar Tracker</h3>
+          <span class="ptile-rev">REV C</span>
+        </div>
+        <div class="model-stage ptile-stage" data-model="assets/assembly.glb" data-rx="-90" data-ry="0" aria-label="Interactive 3D model of the dual-axis solar tracker">
+          <img class="robot-fallback" src="assets/solar-cad.png" alt="Solar tracker CAD" />
+          <span class="robot-hint">drag to rotate</span>
+        </div>
+        <p class="ptile-desc">A dual-axis tracker that chases the brightest light with photoresistors, a Raspberry Pi, and two servos.</p>
+        <div class="ptile-tb">
+          <span><i>Year</i>2026</span>
+          <span><i>Role</i>Mechatronics</span>
+          <span><i>Status</i>Working prototype</span>
+        </div>
+        <div class="proj-detail" hidden>
+          <p>A proof-of-concept dual-axis solar tracker that automatically reorients a panel toward the brightest available light. It senses the light balance with photoresistors, runs the control logic on a Raspberry Pi, and drives motion on two axes with a pair of servo motors — capturing more energy than a fixed panel would.</p>
+          <p>I led the 3D design, printing, and assembly of the structural frame, focusing on mechanical stability and smooth two-axis rotation under the weight of the panel and servos.</p>
+          <p>I then iterated on the mechanism through several print-and-test cycles: opening up motor-mount clearance, adding wire-routing holes to keep the wiring tidy, and refining the gear engagement until the motion was smooth and repeatable.</p>
+        </div>
+        <div class="proj-gallery" hidden>
+          <img src="assets/solar-cad.png" alt="Solar tracker CAD" />
+          <img src="assets/solar-cad2.png" alt="Solar tracker CAD — alternate view" />
+          <img src="assets/solar-built.jpg" alt="Assembled solar tracker prototype" />
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="titleblock">
+    <div class="tb-grid">
+      <div class="tb-cell tb-title"><span class="k">Title</span><b>Drawing index — Projects</b></div>
+      <div class="tb-cell"><span class="k">Dwg no.</span><b>GK-26-04</b></div>
+      <div class="tb-cell"><span class="k">Sheet</span><b>04 / 06</b></div>
+      <div class="tb-cell"><span class="k">Drawn by</span><b>G. KIM</b></div>
+      <div class="tb-cell"><span class="k">Date</span><b>JUN 2026</b></div>
+      <div class="tb-cell"><span class="k">Rev</span><b>C</b></div>
+    </div>
+    <div class="tb-links">
+      <div>&copy; <span data-year></span> Gihyun Kim — all sheets</div>
+      <div class="fl">
+        <a href="about.html">About</a>
+        <a href="cv.html">CV</a>
+        <a href="blog.html">Log</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js?v=51"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="viewer.js?v=20"></script>
+</body>
+</html>

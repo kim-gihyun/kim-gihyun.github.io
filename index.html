@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gihyun Kim</title>
+  <meta name="description" content="Gihyun Kim — engineering student at the University of Hong Kong. Robotics, mechanical design, and applied AI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Gihyun Kim — Engineering @ HKU" />
+  <meta property="og:description" content="Robotics, mechanical design, and applied AI. CV, projects, and blog." />
+  <meta property="og:image" content="https://kim-gihyun.github.io/assets/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:image" content="https://kim-gihyun.github.io/assets/og-card.png" />
+  <meta property="og:url" content="https://kim-gihyun.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://kim-gihyun.github.io/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Gihyun Kim",
+    "url": "https://kim-gihyun.github.io/",
+    "image": "https://kim-gihyun.github.io/assets/profile.jpg",
+    "jobTitle": "Engineering Student",
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "University of Hong Kong" },
+    "alumniOf": { "@type": "EducationalOrganization", "name": "Cheongna Dalton School" },
+    "knowsAbout": ["Robotics", "Mechanical Design", "CAD", "AI Engineering", "3D Printing", "Mechatronics"],
+    "sameAs": ["https://www.linkedin.com/in/gihyun-kim"]
+  }
+  </script>
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');}catch(e){}})();</script>
+  <link rel="stylesheet" href="style.css?v=51" />
+</head>
+<body class="home">
+
+  <header class="topbar">
+    <div class="tb-inner">
+      <a class="brand" href="index.html">Gihyun Kim <span class="brand-sub">Drawing set &middot; rev. 2026</span></a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html" class="active"><i>01</i>Home</a>
+        <a href="about.html"><i>02</i>About</a>
+        <a href="cv.html"><i>03</i>CV</a>
+        <a href="projects.html"><i>04</i>Projects</a>
+        <a href="personal.html"><i>05</i>Personal</a>
+        <a href="blog.html"><i>06</i>Log</a>
+        <button class="theme-btn" type="button" aria-label="Toggle dark mode"></button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="landing">
+    <div class="container">
+      <div class="inner">
+        <div class="lead">
+          <p class="hello">DWG GK-26-01 &middot; General arrangement</p>
+          <h1>Gihyun <span class="accent">Kim</span></h1>
+          <p class="tagline">I turn drawings into <em>machines</em>.</p>
+          <p class="lede">
+            Competition robots, 3D-printed self-powered sensors, and UAV-based turbulence
+            research. <strong>AI Engineering</strong> student and <strong>Laidlaw Scholar</strong>
+            at the <strong>University of Hong Kong</strong> — happiest somewhere between
+            the CAD model and the machine shop.
+          </p>
+          <div class="cta">
+            <a href="projects.html" class="btn primary">Open the drawings <span class="arrow">&rarr;</span></a>
+            <a href="cv.html" class="btn">Data sheet (CV)</a>
+          </div>
+          <div class="quick-links">
+            <a href="mailto:ghkim1106@connect.hku.hk">Email</a>
+            <a href="https://www.linkedin.com/in/gihyun-kim" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="blog.html">Log</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="model-stage home3d" data-model="assets/robot.glb" data-mouse-rotate data-wire-intro data-rx="0" data-ry="210"
+               aria-label="Interactive 3D model of my Robocon robot — move your mouse to rotate it">
+            <div class="model-loader" aria-label="Loading 3D model"><div class="xh-loader" aria-hidden="true"><span></span></div><span class="ldr-label">loading geometry</span></div>
+            <div class="callout c1"><span class="co-line"></span><span class="co-label">FRONT GRIPPERS — WATERJET AL.</span></div>
+            <div class="callout c2"><span class="co-line"></span><span class="co-label">HKU ROBOCON — BUILT &amp; COMPETED</span></div>
+          </div>
+          <div class="section-ctl">
+            <span class="sc-label">Section A–A</span>
+            <input type="range" min="4" max="100" value="100" aria-label="Section cut through the model" />
+            <span class="sc-read">100%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#now">Work orders</a>
+  </main>
+
+  <section class="container now-section" id="now">
+    <h2 class="now-head">Active work orders <span class="now-dot"></span></h2>
+    <ol class="now-list" id="now-grid"><li class="loading">Loading…</li></ol>
+  </section>
+
+  <section class="container" id="stats">
+    <div class="roles">
+      <a class="role-card reveal" href="cv.html">
+        <span class="role-logo" data-mono="LAI"><img src="assets/laidlaw.png" alt="Laidlaw" onerror="this.remove();this.parentNode.classList.add('is-mono')"></span>
+        <div class="role-text">
+          <div class="role-name">Laidlaw Scholar</div>
+          <div class="role-org">HKU LAIDLAW PROGRAMME</div>
+        </div>
+      </a>
+      <a class="role-card reveal" href="cv.html">
+        <span class="role-logo" data-mono="ENG"><img src="assets/hku-eng.png" alt="HKU Faculty of Engineering" onerror="this.remove();this.parentNode.classList.add('is-mono')"></span>
+        <div class="role-text">
+          <div class="role-name">Undergraduate Research Assistant</div>
+          <div class="role-org">HKU FACULTY OF ENGINEERING</div>
+        </div>
+      </a>
+      <a class="role-card reveal" href="projects.html">
+        <span class="role-logo" data-mono="HKUR"><img src="assets/hkur.png" alt="HKU Racing" onerror="this.remove();this.parentNode.classList.add('is-mono')"></span>
+        <div class="role-text">
+          <div class="role-name">HKU Racing</div>
+          <div class="role-org">AERODYNAMICS &amp; VEHICLE DYNAMICS</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="titleblock">
+    <div class="tb-grid">
+      <div class="tb-cell tb-title"><span class="k">Title</span><b>General arrangement — Gihyun Kim</b></div>
+      <div class="tb-cell"><span class="k">Dwg no.</span><b>GK-26-01</b></div>
+      <div class="tb-cell"><span class="k">Sheet</span><b>01 / 06</b></div>
+      <div class="tb-cell"><span class="k">Drawn by</span><b>G. KIM</b></div>
+      <div class="tb-cell"><span class="k">Date</span><b>JUN 2026</b></div>
+      <div class="tb-cell"><span class="k">Rev</span><b>C</b></div>
+    </div>
+    <div class="tb-links">
+      <div>&copy; <span data-year></span> Gihyun Kim — all sheets</div>
+      <div class="fl">
+        <a href="mailto:ghkim1106@connect.hku.hk">Email</a>
+        <a href="https://www.linkedin.com/in/gihyun-kim" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="assets/cv.pdf" target="_blank" rel="noopener">CV PDF</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js?v=51"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="viewer.js?v=20"></script>
+</body>
+</html>

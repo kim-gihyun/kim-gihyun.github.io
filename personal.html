@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal — Gihyun Kim</title>
+  <meta name="description" content="Off the clock — music, places, and daily life of Gihyun Kim." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Personal — Gihyun Kim" />
+  <meta property="og:description" content="Music, travel, and everyday moments." />
+  <meta property="og:image" content="https://kim-gihyun.github.io/assets/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:image" content="https://kim-gihyun.github.io/assets/og-card.png" />
+  <meta property="og:url" content="https://kim-gihyun.github.io/personal.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');}catch(e){}})();</script>
+  <link rel="stylesheet" href="style.css?v=51" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="tb-inner">
+      <a class="brand" href="index.html">Gihyun Kim <span class="brand-sub">Drawing set &middot; rev. 2026</span></a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html"><i>01</i>Home</a>
+        <a href="about.html"><i>02</i>About</a>
+        <a href="cv.html"><i>03</i>CV</a>
+        <a href="projects.html"><i>04</i>Projects</a>
+        <a href="personal.html" class="active"><i>05</i>Personal</a>
+        <a href="blog.html"><i>06</i>Log</a>
+        <button class="theme-btn" type="button" aria-label="Toggle dark mode"></button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container narrow">
+    <header class="page-head reveal">
+      <p class="eyebrow">Sheet 05 &middot; As built</p>
+      <h1>Personal</h1>
+      <p class="sub">The as-built drawing — what I'm listening to, the route that got me here, and everyday moments along the way.</p>
+    </header>
+
+    <!-- ROUTE MAP -->
+    <section class="block reveal">
+      <h2>Route to date</h2>
+      <div class="map-wrap">
+        <div class="map-head"><span>Fig. 2 — <b>Journey, 2006&ndash;present</b></span><span>Equirectangular &middot; NTS</span></div>
+        <svg class="journey" viewBox="0 0 900 380" role="img"
+             aria-label="Map of the journey: Seoul to Istanbul to London, back to Seoul, then Hong Kong. Visited: Singapore, Osaka, Prague, Vienna, Shenzhen.">
+          <!-- graticule -->
+          <g class="grat">
+            <line x1="58" y1="0" x2="58" y2="380"/><line x1="145" y1="0" x2="145" y2="380"/>
+            <line x1="232" y1="0" x2="232" y2="380"/><line x1="319" y1="0" x2="319" y2="380"/>
+            <line x1="406" y1="0" x2="406" y2="380"/><line x1="493" y1="0" x2="493" y2="380"/>
+            <line x1="580" y1="0" x2="580" y2="380"/><line x1="667" y1="0" x2="667" y2="380"/>
+            <line x1="754" y1="0" x2="754" y2="380"/><line x1="841" y1="0" x2="841" y2="380"/>
+            <line x1="0" y1="11.6" x2="900" y2="11.6"/><line x1="0" y1="98.6" x2="900" y2="98.6"/>
+            <line x1="0" y1="185.6" x2="900" y2="185.6"/><line x1="0" y1="272.6" x2="900" y2="272.6"/>
+            <line x1="0" y1="359.6" x2="900" y2="359.6"/>
+          </g>
+
+          <!-- route: Seoul → Istanbul → London → Seoul → Hong Kong -->
+          <path class="route" d="M794.5 141.7 Q510 46 226.1 121.7 M226.1 121.7 Q130 78 57.2 60.8 M57.2 60.8 Q420 6 794.5 141.7 M794.5 141.7 Q762 196 720.2 230.3"/>
+
+          <!-- visited -->
+          <g class="city">
+            <path class="visit" d="M656.3 351.8h8M660.3 347.8v8"/>
+            <text class="visit-label" x="672" y="355">SINGAPORE</text>
+          </g>
+          <g class="city">
+            <path class="visit" d="M839.9 158.4h8M843.9 154.4v8"/>
+            <text class="visit-label" x="833" y="174" text-anchor="end">OSAKA</text>
+          </g>
+          <g class="city">
+            <path class="visit" d="M137.6 69.1h8M141.6 65.1v8"/>
+            <text class="visit-label" x="128" y="64" text-anchor="end">PRAGUE</text>
+          </g>
+          <g class="city">
+            <path class="visit" d="M148.9 80h8M152.9 76v8"/>
+            <text class="visit-label" x="166" y="90">VIENNA</text>
+          </g>
+          <g class="city">
+            <path class="visit" d="M710 217h8M714 213v8"/>
+            <text class="visit-label" x="702" y="212" text-anchor="end">SHENZHEN</text>
+          </g>
+
+          <!-- homes -->
+          <g class="city">
+            <circle class="home-ring" cx="794.5" cy="141.7" r="7.5"/>
+            <circle class="home-dot" cx="794.5" cy="141.7" r="3.2"/>
+            <text class="city-label" x="784" y="124" text-anchor="end">SEOUL</text>
+            <text class="city-sub" x="784" y="135" text-anchor="end">HOME BASE</text>
+          </g>
+          <g class="city">
+            <circle class="home-ring" cx="226.1" cy="121.7" r="7.5"/>
+            <circle class="home-dot" cx="226.1" cy="121.7" r="3.2"/>
+            <text class="city-label" x="226" y="145" text-anchor="middle">ISTANBUL</text>
+            <text class="city-sub" x="226" y="156" text-anchor="middle">4.5 YRS</text>
+          </g>
+          <g class="city">
+            <circle class="home-ring" cx="57.2" cy="60.8" r="7.5"/>
+            <circle class="home-dot" cx="57.2" cy="60.8" r="3.2"/>
+            <text class="city-label" x="72" y="52">LONDON</text>
+            <text class="city-sub" x="72" y="63">1 YR</text>
+          </g>
+          <g class="city">
+            <circle class="now-ring" cx="720.2" cy="230.3" r="10"/>
+            <circle class="home-ring" cx="720.2" cy="230.3" r="6.5"/>
+            <circle class="home-dot" cx="720.2" cy="230.3" r="3.2"/>
+            <text class="city-label" x="734" y="248">HONG KONG</text>
+            <text class="city-sub" x="734" y="259">NOW</text>
+          </g>
+        </svg>
+        <ul class="map-legend">
+          <li><b>&#9679;</b>&nbsp;lived — Seoul &middot; Istanbul (4.5 yrs) &middot; London (1 yr)</li>
+          <li class="lg-now">&#9678;&nbsp;now — Hong Kong</li>
+          <li>&#43;&nbsp;visited — Singapore &middot; Osaka &middot; Prague &middot; Vienna &middot; Shenzhen</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SONGS -->
+    <section class="block reveal">
+      <h2>On repeat</h2>
+      <div class="song-list">
+        <a class="song" href="https://www.youtube.com/watch?v=oZpYEEcvu5I" target="_blank" rel="noopener"><span class="song-cover"><img src="assets/song/bansanka%20cover%20photo.png" alt="" onerror="this.remove()"><span class="song-note">&#9834;</span></span><div class="song-text"><div class="song-title">晩餐歌 (Bansanka)</div><div class="song-artist">tuki.</div></div><span class="song-play" aria-hidden="true">&#9654;</span></a>
+        <a class="song" href="https://www.youtube.com/watch?v=mev609MxcRE" target="_blank" rel="noopener"><span class="song-cover"><img src="assets/song/Vancouver%202%20cover%20pgoto.jpeg" alt="" onerror="this.remove()"><span class="song-note">&#9834;</span></span><div class="song-text"><div class="song-title">Vancouver 2</div><div class="song-artist">BIG Naughty</div></div><span class="song-play" aria-hidden="true">&#9654;</span></a>
+        <a class="song" href="https://www.youtube.com/watch?v=D8rlcLH0pqk" target="_blank" rel="noopener"><span class="song-cover"><img src="assets/song/peter%20pan%20was%20right.jpg" alt="" onerror="this.remove()"><span class="song-note">&#9834;</span></span><div class="song-text"><div class="song-title">Peter Pan Was Right</div><div class="song-artist">Anson Seabra</div></div><span class="song-play" aria-hidden="true">&#9654;</span></a>
+        <a class="song" href="https://www.youtube.com/watch?v=6GUm5g8SG4o" target="_blank" rel="noopener"><span class="song-cover"><img src="assets/song/locked%20away.jpeg" alt="" onerror="this.remove()"><span class="song-note">&#9834;</span></span><div class="song-text"><div class="song-title">Locked Away</div><div class="song-artist">R. City ft. Adam Levine</div></div><span class="song-play" aria-hidden="true">&#9654;</span></a>
+        <a class="song" href="https://www.youtube.com/watch?v=BJdaS7uI3RM" target="_blank" rel="noopener"><span class="song-cover"><img src="assets/song/take%20this%20home%20cover%20photo.jpg" alt="" onerror="this.remove()"><span class="song-note">&#9834;</span></span><div class="song-text"><div class="song-title">Take This Home</div><div class="song-artist">RoadTrip</div></div><span class="song-play" aria-hidden="true">&#9654;</span></a>
+        <a class="song" href="https://www.youtube.com/watch?v=dvgZkm1xWPE" target="_blank" rel="noopener"><span class="song-cover"><img src="assets/song/viva%20la%20vida.jpg" alt="" onerror="this.remove()"><span class="song-note">&#9834;</span></span><div class="song-text"><div class="song-title">Viva la Vida</div><div class="song-artist">Coldplay</div></div><span class="song-play" aria-hidden="true">&#9654;</span></a>
+        <a class="song" href="https://www.youtube.com/watch?v=ulOb9gIGGd0" target="_blank" rel="noopener"><span class="song-cover"><img src="assets/song/my%20love.jpeg" alt="" onerror="this.remove()"><span class="song-note">&#9834;</span></span><div class="song-text"><div class="song-title">My Love</div><div class="song-artist">Westlife</div></div><span class="song-play" aria-hidden="true">&#9654;</span></a>
+      </div>
+    </section>
+
+    <!-- DAILY LIFE -->
+    <section class="block reveal">
+      <h2>Daily life</h2>
+      <p class="daily-note">A few moments, in order — home, school, and the road since.</p>
+      <div class="photo-grid">
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2019.JPG" alt="Among the ruins · 2019" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 01</b>Among the ruins &middot; 2019</figcaption></figure>
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2020%20-%20Eagle.jpg" alt="First eagle · 2020" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 02</b>First eagle &middot; 2020</figcaption></figure>
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2022%20-%20Coming%20home%20%28Seoul%29%20and%20leaving%20home%20%28Istanbul%29.jpg" alt="Two homes, one summer · 2022" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 03</b>Two homes, one summer &middot; 2022</figcaption></figure>
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2022%20-%20First%20Day%20of%20CDS%20%28My%20high%20school%20name%20in%20korea%29.jpg" alt="First bell at CDS · 2022" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 04</b>First bell at CDS &middot; 2022</figcaption></figure>
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2023%20-%20With%20dog.jpg" alt="Me & 뭉이 · 2023" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 05</b>Me &amp; 뭉이 &middot; 2023</figcaption></figure>
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2024%20-%20After%2011th%20Grade.jpg" alt="Eleventh grade, done · 2024" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 06</b>Eleventh grade, done &middot; 2024</figcaption></figure>
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2025%20-%20Day%201%20HK.jpg" alt="Hong Kong, night one · 2025" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 07</b>Hong Kong, night one &middot; 2025</figcaption></figure>
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2025%20-%20Japan%20Grip.jpg" alt="Neon in Osaka · 2025" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 08</b>Neon in Osaka &middot; 2025</figcaption></figure>
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2025.jpg" alt="Under the lights · 2025" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 09</b>Under the lights &middot; 2025</figcaption></figure>
+        <figure class="photo-card"><div class="photo-slot"><img src="assets/Life%20Photos/2026%20-%20shun%20hiing%20college%20high%20table%20dinner.jpg" alt="High table, Shun Hing · 2026" loading="lazy" onerror="this.remove()"><span class="ph">add photo</span></div><figcaption><b>Fig. 10</b>High table, Shun Hing &middot; 2026</figcaption></figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="titleblock">
+    <div class="tb-grid">
+      <div class="tb-cell tb-title"><span class="k">Title</span><b>As built — Personal</b></div>
+      <div class="tb-cell"><span class="k">Dwg no.</span><b>GK-26-05</b></div>
+      <div class="tb-cell"><span class="k">Sheet</span><b>05 / 06</b></div>
+      <div class="tb-cell"><span class="k">Drawn by</span><b>G. KIM</b></div>
+      <div class="tb-cell"><span class="k">Date</span><b>JUN 2026</b></div>
+      <div class="tb-cell"><span class="k">Rev</span><b>C</b></div>
+    </div>
+    <div class="tb-links">
+      <div>&copy; <span data-year></span> Gihyun Kim — all sheets</div>
+      <div class="fl">
+        <a href="about.html">About</a>
+        <a href="cv.html">CV</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog.html">Log</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js?v=51"></script>
+</body>
+</html>
