@@ -10,8 +10,8 @@ window.I18N = {
   'ui.dark':      { en: 'Dark',      ko: '다크' },
   'ui.light':     { en: 'Light',     ko: '라이트' },
 
-  'home.tagline': { en: 'From concept to <em>reality</em>.',
-                    ko: '구상에서 <em>실물</em>까지.' },
+  'home.tagline': { en: 'Drafting ideas. Building <em>reality</em>.',
+                    ko: '아이디어를 제도하고, <em>현실</em>을 만듭니다.' },
   'home.cta1':    { en: 'Open the drawings <span class="arrow">&rarr;</span>',
                     ko: '도면 보기 <span class="arrow">&rarr;</span>' },
   'home.cta2':    { en: 'Data sheet (CV)', ko: '데이터 시트 (CV)' },
