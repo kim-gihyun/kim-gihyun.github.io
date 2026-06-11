@@ -33,7 +33,7 @@
   }
   </script>
   <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');}catch(e){}})();</script>
-  <link rel="stylesheet" href="style.css?v=52" />
+  <link rel="stylesheet" href="style.css?v=53" />
 </head>
 <body class="home">
 
@@ -60,12 +60,28 @@
           <p class="hello">DWG GK-26-01 &middot; General arrangement</p>
           <h1>Gihyun <span class="accent">Kim</span></h1>
           <p class="tagline">I turn drawings into <em>machines</em>.</p>
-          <p class="lede">
-            Competition robots, 3D-printed self-powered sensors, and UAV-based turbulence
-            research. <strong>AI Engineering</strong> student and <strong>Laidlaw Scholar</strong>
-            at the <strong>University of Hong Kong</strong> — happiest somewhere between
-            the CAD model and the machine shop.
-          </p>
+
+          <table class="bom" aria-label="Bill of materials — what I'm made of">
+            <caption>BOM — Bill of materials</caption>
+            <tbody>
+              <tr data-href="projects.html" tabindex="0">
+                <td class="bom-no">01</td>
+                <td>Competition robots — Robocon &amp; HKU Racing</td>
+                <td class="bom-ref">PRJ-01…04 <span class="bom-arrow">&rarr;</span></td>
+              </tr>
+              <tr data-href="cv.html" tabindex="0">
+                <td class="bom-no">02</td>
+                <td>Research — UAV turbulence &middot; wearable TENGs</td>
+                <td class="bom-ref">LAIDLAW &middot; SHIN LAB <span class="bom-arrow">&rarr;</span></td>
+              </tr>
+              <tr data-href="about.html" tabindex="0">
+                <td class="bom-no">03</td>
+                <td>AI Engineering @ HKU — full scholarship</td>
+                <td class="bom-ref">2025–29 <span class="bom-arrow">&rarr;</span></td>
+              </tr>
+            </tbody>
+          </table>
+
           <div class="cta">
             <a href="projects.html" class="btn primary">Open the drawings <span class="arrow">&rarr;</span></a>
             <a href="cv.html" class="btn">Data sheet (CV)</a>
@@ -74,6 +90,7 @@
             <a href="mailto:ghkim1106@connect.hku.hk">Email</a>
             <a href="https://www.linkedin.com/in/gihyun-kim" target="_blank" rel="noopener">LinkedIn</a>
             <a href="blog.html">Log</a>
+            <a class="hi" href="about.html">About me &rarr;</a>
           </div>
         </div>
 
@@ -145,7 +162,7 @@
     </div>
   </footer>
 
-  <script src="main.js?v=52"></script>
+  <script src="main.js?v=53"></script>
   <script type="importmap">
   {
     "imports": {

@@ -129,7 +129,7 @@
     var mx = -200, my = -200, ticking = false, boxEl = null;
     var rootStyle = document.documentElement.style;
     var LOCK_SEL = 'a,button,.btn,.ptile,.role-card,.song,.fact,.tags span,.pf-btn,' +
-      '.photo-slot,.gallery img,.theme-btn,.nav-toggle,input[type="range"],.now-card,.post-list li';
+      '.photo-slot,.gallery img,.theme-btn,.nav-toggle,input[type="range"],.now-card,.post-list li,tr[data-href]';
 
     function paint() {
       ticking = false;
@@ -196,6 +196,14 @@
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // ---- Clickable rows (hero BOM etc.) ----
+  document.querySelectorAll('[data-href]').forEach(function (row) {
+    row.addEventListener('click', function () { location.href = row.getAttribute('data-href'); });
+    row.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); location.href = row.getAttribute('data-href'); }
+    });
+  });
 
   // ---- Mobile nav ----
   var toggle = document.querySelector('.nav-toggle');
