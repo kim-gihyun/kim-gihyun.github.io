@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');}catch(e){}})();</script>
-  <link rel="stylesheet" href="style.css?v=53" />
+  <link rel="stylesheet" href="style.css?v=54" />
 </head>
 <body>
 
@@ -41,7 +41,7 @@
   <main class="container">
     <header class="page-head reveal">
       <p class="eyebrow">Sheet 02 &middot; General notes</p>
-      <h1>Hello — I'm Gihyun.</h1>
+      <h1 data-i18n="about.h1">Hello — I'm Gihyun.</h1>
     </header>
 
     <div class="about-grid">
@@ -53,36 +53,36 @@
         <p class="fig-label">Fig. 1 — Victoria Harbour, Hong Kong &middot; 2026</p>
       </div>
       <div class="about-body reveal">
-        <p>
+        <p data-i18n="about.p1">
           I'm an engineering student at the <strong>University of Hong Kong</strong>, pursuing
           a combined BEng and MScEng in AI Engineering on a full scholarship. I grew up in
-          South Korea, spent five and a half years between Istanbul and London, and now live
+          South Korea, spent five and a half years between London and Istanbul, and now live
           between Hong Kong and Seoul.
         </p>
-        <p>
+        <p data-i18n="about.p2">
           As a <strong>Laidlaw Scholar</strong>, I'm researching UAV-based analysis of urban
           atmospheric turbulence, and in Prof. Dong-Myeong Shin's lab I work on 3D-printed
           triboelectric nanogenerators for wearable sensing. Outside research, I build real
           hardware with the <strong>HKU Robocon</strong> and <strong>HKU Racing</strong> teams —
           designing, machining, and assembling parts that have to survive competition.
         </p>
-        <p>
+        <p data-i18n="about.p3">
           The work I like best sits where mechanical design, electronics, and software meet:
           an idea becomes a CAD model, the model becomes a printed or machined part, and the
           part becomes something that actually moves. The moment a part finally fits is still
           my favourite part of engineering. I also enjoy teaching — I've founded study clubs
           and TA'd physics and math.
         </p>
-        <p>
+        <p data-i18n="about.p4">
           This site is organised like a drawing set: a <a href="cv.html">data sheet (CV)</a>,
           the <a href="projects.html">project drawings</a> — with live 3D models and revision
           histories — and an <a href="blog.html">engineering log</a> for research notes.
         </p>
 
         <div class="fact-row">
-          <div class="fact"><span class="k">Based in</span><span class="v">Hong Kong / Seoul</span></div>
-          <div class="fact"><span class="k">Studying</span><span class="v">AI Engineering</span></div>
-          <div class="fact"><span class="k">Focus</span><span class="v">Robotics &amp; Applied AI</span></div>
+          <div class="fact"><span class="k" data-i18n="about.f1k">Based in</span><span class="v" data-i18n="about.f1v">Hong Kong / Seoul</span></div>
+          <div class="fact"><span class="k" data-i18n="about.f2k">Studying</span><span class="v" data-i18n="about.f2v">AI Engineering</span></div>
+          <div class="fact"><span class="k" data-i18n="about.f3k">Focus</span><span class="v" data-i18n="about.f3v">Robotics &amp; Applied AI</span></div>
         </div>
       </div>
     </div>
@@ -108,6 +108,7 @@
     </div>
   </footer>
 
-  <script src="main.js?v=53"></script>
+  <script src="i18n.js?v=1"></script>
+  <script src="main.js?v=54"></script>
 </body>
 </html>

@@ -108,18 +108,19 @@ function initViewer(stage, THREE, gl, oc, env, reduced) {
     clippingPlanes: sectionCtl ? [clipPlane] : null
   });
 
-  new gl.GLTFLoader().load(url, (gltf) => {
+  const onLoad = (gltf) => {
     const root = gltf.scene;
     const wires = [];
-    root.traverse((o) => {
-      if (o.isMesh) {
-        o.material = material;
-        if (o.geometry) { o.geometry.deleteAttribute('normal'); o.geometry.computeVertexNormals(); }
-        if (wantIntro) {
-          const wm = new THREE.Mesh(o.geometry, wireMat);
-          wm.position.copy(o.position); wm.quaternion.copy(o.quaternion); wm.scale.copy(o.scale);
-          wires.push({ src: o, mesh: wm });
-        }
+    const parts = [];
+    root.traverse((o) => { if (o.isMesh) parts.push(o); });
+    const multiPart = parts.length > 1;
+    parts.forEach((o) => {
+      o.material = material;
+      if (o.geometry) { o.geometry.deleteAttribute('normal'); o.geometry.computeVertexNormals(); }
+      if (wantIntro && !multiPart) {
+        const wm = new THREE.Mesh(o.geometry, wireMat);
+        wm.position.copy(o.position); wm.quaternion.copy(o.quaternion); wm.scale.copy(o.scale);
+        wires.push({ src: o, mesh: wm });
       }
     });
     // attach wireframe twins next to their sources
@@ -181,7 +182,45 @@ function initViewer(stage, THREE, gl, oc, env, reduced) {
       sectionCtl.classList.add('ready');
     }
 
-    // ---- wireframe -> solid intro ----
+    // ---- exploded view (multi-part assemblies) ----
+    const exCtl = (function () {
+      const scope = stage.closest('.hero-visual') || stage.parentElement;
+      return scope ? scope.querySelector('.explode-ctl') : null;
+    })();
+    if (multiPart && exCtl) {
+      spin.updateMatrixWorld(true);
+      parts.forEach((o) => {
+        const bcW = new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3());
+        const pInv = o.parent.matrixWorld.clone().invert();
+        const a = bcW.clone().applyMatrix4(pInv);
+        const b = fitCenter.clone().applyMatrix4(pInv);
+        o.userData.exDir = a.sub(b);
+        o.userData.exBase = o.position.clone();
+      });
+      const exInput = exCtl.querySelector('input[type="range"]');
+      const exRead = exCtl.querySelector('.sc-read');
+      const MAXF = 0.9;
+      const exApply = (f) => {
+        parts.forEach((o) => o.position.copy(o.userData.exBase).addScaledVector(o.userData.exDir, f));
+        if (exRead) exRead.textContent = Math.round(f / MAXF * 100) + '%';
+      };
+      if (exInput) exInput.addEventListener('input', () => exApply(parseFloat(exInput.value) / 100 * MAXF));
+      exCtl.hidden = false; exCtl.classList.add('ready');
+      // intro: arrive exploded, then assemble itself
+      if (!reduced) {
+        const t0 = performance.now(), D = 2000, startF = 0.8;
+        (function step(t) {
+          const p = Math.min((t - t0) / D, 1);
+          const e = 1 - Math.pow(1 - p, 3);
+          const f = startF * (1 - e);
+          exApply(f);
+          if (exInput) exInput.value = Math.round(f / MAXF * 100);
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      } else { exApply(0); }
+    }
+
+    // ---- wireframe -> solid intro (single-mesh models) ----
     if (wantIntro && wires.length) {
       material.transparent = true; material.opacity = 0;
       const t0 = performance.now(), durW = 1100, durS = 1700;
@@ -198,7 +237,18 @@ function initViewer(stage, THREE, gl, oc, env, reduced) {
         }
       })(t0);
     }
-  }, undefined, () => { stage.classList.add('failed'); });
+  };
+
+  // load with optional fallback (e.g. assembly file not pushed yet)
+  const loader = new gl.GLTFLoader();
+  const fallbackUrl = stage.getAttribute('data-model-fallback');
+  loader.load(url, onLoad, undefined, () => {
+    if (fallbackUrl && fallbackUrl !== url) {
+      loader.load(fallbackUrl, onLoad, undefined, () => { stage.classList.add('failed'); });
+    } else {
+      stage.classList.add('failed');
+    }
+  });
 
   function resize() { renderer.setSize(W(), H()); cam.aspect = W() / H(); cam.updateProjectionMatrix(); }
   window.addEventListener('resize', resize);

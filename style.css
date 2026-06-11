@@ -207,6 +207,30 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .bom tr[data-href]:hover .bom-arrow, .bom tr[data-href]:focus-visible .bom-arrow { opacity: 1; transform: none; }
 html.dark .bom { border-color: var(--line); }
 
+/* hero role strips (under the name) */
+.hero-roles { display: flex; flex-direction: column; gap: 10px; max-width: 440px; margin: 2px 0 30px; }
+.hero-roles .role-card { padding: 11px 15px; gap: 13px; }
+.hero-roles .role-logo { width: 42px; height: 42px; }
+.hero-roles .role-logo img { padding: 5px; }
+.hero-roles .role-name { font-size: .98rem; }
+.hero-roles .role-org { font-size: .62rem; }
+
+/* language toggle (topbar, right side) */
+.lang-btn {
+  margin-left: auto; border: 1px solid var(--line); background: var(--surface);
+  color: var(--muted); cursor: pointer; padding: 8px 12px;
+  font: 600 .66rem/1 var(--mono); letter-spacing: .12em;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.lang-btn:hover { color: var(--accent-strong); border-color: var(--accent); background: var(--accent-soft); }
+@media (max-width: 760px) { .lang-btn { margin-right: 10px; } }
+
+/* hidden control rows stay hidden despite display:flex */
+.section-ctl[hidden] { display: none; }
+
+/* nudge the hero model toward the page centre (desktop) */
+@media (min-width: 900px) { .model-stage.home3d { margin-left: 7%; } }
+
 /* emphasized quick link */
 .quick-links a.hi {
   color: var(--accent-strong); border: 1px solid var(--accent-strong);
@@ -226,13 +250,13 @@ html.dark .quick-links a.hi:hover { color: #08121d; }
 
 /* hero entrance */
 .landing .hello, .landing h1, .landing .tagline, .landing .lede, .landing .bom,
-.landing .cta, .landing .quick-links {
+.landing .hero-roles, .landing .cta, .landing .quick-links {
   opacity: 0; animation: heroEnter .6s cubic-bezier(.2,.7,.2,1) forwards;
 }
 .landing .hello       { animation-delay: .05s; }
 .landing h1           { animation-delay: .14s; }
 .landing .tagline     { animation-delay: .26s; }
-.landing .lede, .landing .bom { animation-delay: .38s; }
+.landing .lede, .landing .bom, .landing .hero-roles { animation-delay: .38s; }
 .landing .cta         { animation-delay: .48s; }
 .landing .quick-links { animation-delay: .58s; }
 @keyframes heroEnter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -725,9 +749,12 @@ html.dark .journey .land {
   stroke: color-mix(in srgb, var(--accent) 40%, transparent);
 }
 .journey .grat { stroke: var(--grid-major); stroke-width: 1; }
-.journey .route-dot { fill: var(--ok); opacity: 0; transition: opacity .6s ease 3.2s; }
-.journey.drawn .route-dot { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .journey .route-dot { display: none; } }
+/* a little aircraft symbol, forever flying the route */
+.journey .route-craft { opacity: 0; transition: opacity .6s ease 3.2s; }
+.journey.drawn .route-craft { opacity: 1; }
+.journey .route-craft path { fill: var(--accent-strong); }
+.journey .route-craft .craft-trail { fill: none; stroke: var(--accent-strong); stroke-width: 1; opacity: .45; }
+@media (prefers-reduced-motion: reduce) { .journey .route-craft { display: none; } }
 .journey .route {
   fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 6 5;
   opacity: .9;
@@ -823,7 +850,7 @@ main { animation: pageEnter .34s cubic-bezier(.2,.8,.2,1) both; }
   html { scroll-behavior: auto; }
   .reveal, .now-card { opacity: 1; transform: none; transition: none; }
   .landing .hello, .landing h1, .landing .tagline, .landing .lede, .landing .bom,
-  .landing .cta, .landing .quick-links, .hero-visual { animation: none; opacity: 1; transform: none; }
+  .landing .hero-roles, .landing .cta, .landing .quick-links, .hero-visual { animation: none; opacity: 1; transform: none; }
   main { animation: none; }
   .scroll-cue::after, .now-dot, .xh-loader span, .ldr-label { animation: none; }
   .journey.drawn .route { animation: none; stroke-dashoffset: 0; }

@@ -28,14 +28,43 @@
   // ---- Theme toggle ----
   var moon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
   var sun = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>';
+  // ---- Language (EN / KO) ----
+  var DICT = window.I18N || {};
+  var lang = 'en';
+  try { lang = localStorage.getItem('lang') === 'ko' ? 'ko' : 'en'; } catch (e) {}
+  var langPainters = [];
+  function t(key) { var e = DICT[key]; return e ? (e[lang] || e.en) : null; }
+  function applyLang() {
+    document.documentElement.setAttribute('lang', lang === 'ko' ? 'ko' : 'en');
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var v = t(el.getAttribute('data-i18n'));
+      if (v != null) el.innerHTML = v;
+    });
+    // topbar nav labels (keep the <i>NN</i> sheet number)
+    document.querySelectorAll('.nav-links a').forEach(function (a) {
+      var file = (a.getAttribute('href') || '').split('/').pop().replace('.html', '') || 'index';
+      var v = t('nav.' + file);
+      if (v != null) {
+        var i = a.querySelector('i');
+        a.innerHTML = (i ? i.outerHTML : '') + v;
+      }
+    });
+    langPainters.forEach(function (p) { p(); });
+  }
+  function setLang(l) {
+    lang = l;
+    try { localStorage.setItem('lang', l); } catch (e) {}
+    applyLang();
+  }
+
   var themePainters = [];
   function wireTheme(btn, withLabel) {
     function paint() {
       var dark = document.documentElement.classList.contains('dark');
       btn.innerHTML = (dark ? sun : moon) +
-        (withLabel ? '<span class="dock-label">' + (dark ? 'Light' : 'Dark') + '</span>' : '');
+        (withLabel ? '<span class="dock-label">' + (t(dark ? 'ui.light' : 'ui.dark') || (dark ? 'Light' : 'Dark')) + '</span>' : '');
     }
-    paint(); themePainters.push(paint);
+    paint(); themePainters.push(paint); langPainters.push(paint);
     btn.addEventListener('click', function () {
       var dark = document.documentElement.classList.toggle('dark');
       try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
@@ -43,6 +72,22 @@
     });
   }
   document.querySelectorAll('.theme-btn').forEach(function (b) { wireTheme(b, false); });
+
+  // language button — top right of the bar, before the mobile hamburger
+  (function () {
+    var tb = document.querySelector('.topbar .tb-inner');
+    if (!tb) return;
+    var btn = document.createElement('button');
+    btn.className = 'lang-btn'; btn.type = 'button';
+    function paint() {
+      btn.textContent = lang === 'ko' ? 'EN' : '한국어';
+      btn.setAttribute('aria-label', lang === 'ko' ? 'Switch to English' : '한국어로 보기');
+    }
+    paint(); langPainters.push(paint);
+    btn.addEventListener('click', function () { setLang(lang === 'ko' ? 'en' : 'ko'); });
+    var toggleBtn = tb.querySelector('.nav-toggle');
+    tb.insertBefore(btn, toggleBtn || null);
+  })();
 
   // ---- Dock: flat sheet-tab rail (desktop; CSS hides it under 900px) ----
   (function () {
@@ -60,9 +105,10 @@
     dock.innerHTML = items.map(function (it) {
       var active = (path === it[0] || (path === '' && it[0] === 'index.html') ||
                     (path === 'post.html' && it[0] === 'blog.html')) ? ' active' : '';
+      var key = 'nav.' + it[0].replace('.html', '');
       return '<a class="dock-link' + active + '" href="' + it[0] + '" aria-label="' + it[2] + '"' +
         (active ? ' aria-current="page"' : '') + '>' +
-        it[1] + '<span class="dock-label">' + it[1] + ' &middot; ' + it[2] + '</span></a>';
+        it[1] + '<span class="dock-label" data-dock-key="' + key + '">' + it[1] + ' &middot; ' + it[2] + '</span></a>';
     }).join('');
     var themeBtn = document.createElement('button');
     themeBtn.className = 'dock-link'; themeBtn.type = 'button';
@@ -70,6 +116,12 @@
     wireTheme(themeBtn, true);
     dock.appendChild(themeBtn);
     document.body.appendChild(dock);
+    langPainters.push(function () {
+      dock.querySelectorAll('[data-dock-key]').forEach(function (lbl) {
+        var v = t(lbl.getAttribute('data-dock-key'));
+        if (v != null) lbl.innerHTML = lbl.textContent.split('·')[0].trim() + ' &middot; ' + v;
+      });
+    });
   })();
 
   // ---- Drafting cursor: crosshair guides, coords, grid snap, bracket lock ----
@@ -450,4 +502,7 @@
       route.style.strokeDasharray = '6 5'; route.style.strokeDashoffset = '';
     }
   }
+
+  // translate static content once everything is injected
+  applyLang();
 })();
