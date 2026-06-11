@@ -14,7 +14,8 @@ function loadModules() {
       import('three'),
       import('three/addons/loaders/GLTFLoader.js'),
       import('three/addons/controls/OrbitControls.js'),
-      import('three/addons/environments/RoomEnvironment.js')
+      import('three/addons/environments/RoomEnvironment.js'),
+      import('three/addons/loaders/DRACOLoader.js')
     ]);
   }
   return modulesPromise;
@@ -24,10 +25,10 @@ window.mountViewer = function (stage) {
   const handle = { disposed: false, dispose: function () { this.disposed = true; } };
   loadModules().then(function (mods) {
     if (handle.disposed) return;
-    const THREE = mods[0], gl = mods[1], oc = mods[2], env = mods[3];
+    const THREE = mods[0], gl = mods[1], oc = mods[2], env = mods[3], dr = mods[4];
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     try {
-      const inner = initViewer(stage, THREE, gl, oc, env, reduced);
+      const inner = initViewer(stage, THREE, gl, oc, env, dr, reduced);
       handle.dispose = inner.dispose;
       if (handle.disposed) inner.dispose();
     } catch (e) { stage.classList.add('failed'); }
@@ -43,7 +44,7 @@ document.querySelectorAll('[data-model]').forEach(function (s) {
   window.mountViewer(s);
 });
 
-function initViewer(stage, THREE, gl, oc, env, reduced) {
+function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
   const url = stage.getAttribute('data-model');
   const W = () => stage.clientWidth || 1;
   const H = () => stage.clientHeight || 1;
@@ -112,7 +113,11 @@ function initViewer(stage, THREE, gl, oc, env, reduced) {
     const root = gltf.scene;
     const wires = [];
     const parts = [];
-    root.traverse((o) => { if (o.isMesh) parts.push(o); });
+    // CAD exporters embed their own cameras/lights — silence them
+    root.traverse((o) => {
+      if (o.isLight || o.isCamera) o.visible = false;
+      if (o.isMesh) parts.push(o);
+    });
     const multiPart = parts.length > 1;
     parts.forEach((o) => {
       o.material = material;
@@ -187,7 +192,7 @@ function initViewer(stage, THREE, gl, oc, env, reduced) {
       const scope = stage.closest('.hero-visual') || stage.parentElement;
       return scope ? scope.querySelector('.explode-ctl') : null;
     })();
-    if (multiPart && exCtl) {
+    if (multiPart && exCtl) try {
       spin.updateMatrixWorld(true);
       parts.forEach((o) => {
         const bcW = new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3());
@@ -218,7 +223,7 @@ function initViewer(stage, THREE, gl, oc, env, reduced) {
           if (p < 1) requestAnimationFrame(step);
         })(t0);
       } else { exApply(0); }
-    }
+    } catch (e) { /* explode is an enhancement — never let it kill the render */ }
 
     // ---- wireframe -> solid intro (single-mesh models) ----
     if (wantIntro && wires.length) {
@@ -241,6 +246,10 @@ function initViewer(stage, THREE, gl, oc, env, reduced) {
 
   // load with optional fallback (e.g. assembly file not pushed yet)
   const loader = new gl.GLTFLoader();
+  // SolidWorks exports are Draco-compressed — attach the decoder
+  const draco = new dr.DRACOLoader();
+  draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/');
+  loader.setDRACOLoader(draco);
   const fallbackUrl = stage.getAttribute('data-model-fallback');
   loader.load(url, onLoad, undefined, () => {
     if (fallbackUrl && fallbackUrl !== url) {
