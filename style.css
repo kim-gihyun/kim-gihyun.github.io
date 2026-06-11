@@ -229,7 +229,7 @@ html.dark .bom { border-color: var(--line); }
 .section-ctl[hidden] { display: none; }
 
 /* nudge the hero model toward the page centre (desktop) */
-@media (min-width: 900px) { .model-stage.home3d { margin-left: 7%; } }
+@media (min-width: 900px) { .model-stage.home3d { margin-left: 14%; } }
 
 /* emphasized quick link */
 .quick-links a.hi {

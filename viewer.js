@@ -96,6 +96,10 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
     const scope = stage.closest('.hero-visual') || stage.parentElement;
     return scope ? scope.querySelector('.section-ctl:not(.explode-ctl)') : null;
   })();
+  const exCtl = (function () {
+    const scope = stage.closest('.hero-visual') || stage.parentElement;
+    return scope ? scope.querySelector('.explode-ctl') : null;
+  })();
   const clipPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1e6); // x <= c
   const wantIntro = stage.hasAttribute('data-wire-intro') && !reduced;
 
@@ -161,7 +165,9 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
     const radius = mouseMode ? yawSafe : sphere;
     const fov = cam.fov * Math.PI / 180;
     const zoom = parseFloat(stage.getAttribute('data-zoom')) || 1;
-    const dist = (radius / Math.sin(fov / 2)) * (mouseMode ? 0.98 : 0.9) / zoom;
+    let dist = (radius / Math.sin(fov / 2)) * (mouseMode ? 0.98 : 0.9) / zoom;
+    // exploded assemblies need breathing room so parts don't clip the frame
+    if (multiPart && exCtl) dist *= 1.22;
     const az = mouseMode ? 0 : 0.6;
     cam.position.set(fitCenter.x + Math.sin(az) * dist, fitCenter.y + radius * 0.32, fitCenter.z + Math.cos(az) * dist);
     cam.near = Math.max(dist / 100, 0.001);
@@ -188,10 +194,6 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
     }
 
     // ---- exploded view (multi-part assemblies) ----
-    const exCtl = (function () {
-      const scope = stage.closest('.hero-visual') || stage.parentElement;
-      return scope ? scope.querySelector('.explode-ctl') : null;
-    })();
     if (multiPart && exCtl) try {
       spin.updateMatrixWorld(true);
       parts.forEach((o) => {
@@ -204,7 +206,7 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
       });
       const exInput = exCtl.querySelector('input[type="range"]');
       const exRead = exCtl.querySelector('.sc-read');
-      const MAXF = 0.9;
+      const MAXF = 0.7;
       const exApply = (f) => {
         parts.forEach((o) => o.position.copy(o.userData.exBase).addScaledVector(o.userData.exDir, f));
         if (exRead) exRead.textContent = Math.round(f / MAXF * 100) + '%';
@@ -213,7 +215,7 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
       exCtl.hidden = false; exCtl.classList.add('ready');
       // intro: arrive exploded, hold a beat, then assemble itself
       if (!reduced) {
-        const HOLD = 450, D = 2200, startF = 0.8;
+        const HOLD = 450, D = 2200, startF = MAXF;
         exApply(startF);
         if (exInput) exInput.value = Math.round(startF / MAXF * 100);
         const t0 = performance.now();
