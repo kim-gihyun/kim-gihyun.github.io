@@ -21,8 +21,8 @@ window.I18N = {
   'home.q.log':   { en: 'Log',       ko: '기록' },
   'home.now':     { en: 'Active work orders', ko: '진행 중인 작업' },
   'home.scroll':  { en: 'Work orders', ko: '작업 목록' },
-  'home.role1.name': { en: 'Laidlaw Scholar', ko: '라이드로 장학생' },
-  'home.role1.org':  { en: 'HKU LAIDLAW PROGRAMME', ko: 'HKU 라이드로 프로그램' },
+  'home.role1.name': { en: 'Laidlaw Scholar', ko: '레이드로 장학생' },
+  'home.role1.org':  { en: 'HKU LAIDLAW PROGRAMME', ko: 'HKU 레이드로 프로그램' },
   'home.role2.name': { en: 'Undergraduate Research Assistant', ko: '학부 연구조교' },
   'home.role2.org':  { en: 'HKU FACULTY OF ENGINEERING', ko: 'HKU 공과대학' },
   'home.role3.name': { en: 'HKU Racing', ko: 'HKU 레이싱' },
@@ -35,7 +35,7 @@ window.I18N = {
   },
   'about.p2': {
     en: "As a <strong>Laidlaw Scholar</strong>, I'm researching UAV-based analysis of urban atmospheric turbulence, and in Prof. Dong-Myeong Shin's lab I work on 3D-printed triboelectric nanogenerators for wearable sensing. Outside research, I build real hardware with the <strong>HKU Robocon</strong> and <strong>HKU Racing</strong> teams — designing, machining, and assembling parts that have to survive competition.",
-    ko: "<strong>라이드로 장학생</strong>으로 도시 대기 난류의 UAV 기반 분석을 연구하고 있으며, 신동명 교수님 연구실에서는 웨어러블 센싱을 위한 3D 프린팅 마찰전기 나노발전기를 연구합니다. 연구 밖에서는 <strong>HKU 로보콘</strong>과 <strong>HKU 레이싱</strong> 팀에서 대회를 견뎌야 하는 진짜 하드웨어를 설계하고, 가공하고, 조립합니다."
+    ko: "<strong>레이드로 장학생</strong>으로 도시 대기 난류의 UAV 기반 분석을 연구하고 있으며, 신동명 교수님 연구실에서는 웨어러블 센싱을 위한 3D 프린팅 마찰전기 나노발전기를 연구합니다. 연구 밖에서는 <strong>HKU 로보콘</strong>과 <strong>HKU 레이싱</strong> 팀에서 대회를 견뎌야 하는 진짜 하드웨어를 설계하고, 가공하고, 조립합니다."
   },
   'about.p3': {
     en: "The work I like best sits where mechanical design, electronics, and software meet: an idea becomes a CAD model, the model becomes a printed or machined part, and the part becomes something that actually moves. The moment a part finally fits is still my favourite part of engineering. I also enjoy teaching — I've founded study clubs and TA'd physics and math.",
