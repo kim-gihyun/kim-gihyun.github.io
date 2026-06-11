@@ -94,7 +94,7 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
   // section cut: a world-space clipping plane driven by a sibling slider
   const sectionCtl = (function () {
     const scope = stage.closest('.hero-visual') || stage.parentElement;
-    return scope ? scope.querySelector('.section-ctl') : null;
+    return scope ? scope.querySelector('.section-ctl:not(.explode-ctl)') : null;
   })();
   const clipPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1e6); // x <= c
   const wantIntro = stage.hasAttribute('data-wire-intro') && !reduced;
@@ -211,12 +211,15 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
       };
       if (exInput) exInput.addEventListener('input', () => exApply(parseFloat(exInput.value) / 100 * MAXF));
       exCtl.hidden = false; exCtl.classList.add('ready');
-      // intro: arrive exploded, then assemble itself
+      // intro: arrive exploded, hold a beat, then assemble itself
       if (!reduced) {
-        const t0 = performance.now(), D = 2000, startF = 0.8;
+        const HOLD = 450, D = 2200, startF = 0.8;
+        exApply(startF);
+        if (exInput) exInput.value = Math.round(startF / MAXF * 100);
+        const t0 = performance.now();
         (function step(t) {
-          const p = Math.min((t - t0) / D, 1);
-          const e = 1 - Math.pow(1 - p, 3);
+          const p = Math.min(Math.max((t - t0 - HOLD) / D, 0), 1);
+          const e = 1 - Math.pow(1 - p, 3);            // ease-out, like parts seating home
           const f = startF * (1 - e);
           exApply(f);
           if (exInput) exInput.value = Math.round(f / MAXF * 100);
