@@ -76,4 +76,4 @@ Thus, we decided to pivot to a different yet somewhat similar idea that would bu
 
 ## References
 
-Peng, X., et al. (2022). 3D printing of TPMS structures — MATLAB-generated geometry to FDM workflow.
+Peng, C., Marzocca, P., & Tran, P. (2022). Triply periodic minimal surfaces based honeycomb structures with tuneable mechanical responses. *Virtual and Physical Prototyping, 18*(1). [https://doi.org/10.1080/17452759.2022.2125879](https://doi.org/10.1080/17452759.2022.2125879)

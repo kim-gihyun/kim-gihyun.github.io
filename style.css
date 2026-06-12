@@ -443,12 +443,12 @@ html.dark .quick-links a.hi:hover { color: #08121d; }
 .about-body p strong { color: var(--text); }
 .about-body a { border-bottom: 1px solid var(--accent); }
 .about-body a:hover { text-decoration: none; color: var(--accent-deep); }
-.fact-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 28px; border: 1px solid var(--line); }
-.fact { background: var(--surface); padding: 13px 16px; font-family: var(--mono); border-right: 1px solid var(--line); }
+.fact-row { display: flex; margin-top: 28px; border: 1px solid var(--line); }
+.fact { flex: 1 1 auto; min-width: 0; background: var(--surface); padding: 13px 15px; font-family: var(--mono); border-right: 1px solid var(--line); }
 .fact:last-child { border-right: 0; }
 .fact .k { display: block; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin-bottom: 3px; }
-.fact .v { font-family: var(--serif); font-size: .95rem; font-weight: 600; color: var(--text); }
-@media (max-width: 560px) { .fact-row { grid-template-columns: 1fr; } .fact { border-right: 0; border-bottom: 1px solid var(--line); } .fact:last-child { border-bottom: 0; } }
+.fact .v { font-family: var(--serif); font-size: .92rem; font-weight: 600; color: var(--text); white-space: nowrap; }
+@media (max-width: 700px) { .fact-row { flex-direction: column; } .fact { border-right: 0; border-bottom: 1px solid var(--line); } .fact:last-child { border-bottom: 0; } }
 @media (max-width: 720px){ .about-grid{ grid-template-columns:1fr; gap:28px;} .about-photo-col{ position: static; max-width: 300px; } }
 
 /* ---------- CV entries ---------- */
