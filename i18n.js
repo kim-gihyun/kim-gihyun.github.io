@@ -30,8 +30,8 @@ window.I18N = {
 
   'about.h1': { en: "Hello — I'm Gihyun.", ko: '안녕하세요, 김기현입니다.' },
   'about.p1': {
-    en: "I'm an engineering student at the <strong>University of Hong Kong</strong>, pursuing a combined BEng and MScEng in AI Engineering on a full scholarship. I grew up in South Korea, spent five and a half years between London and Istanbul, and now live between Hong Kong and Seoul.",
-    ko: "<strong>홍콩대학교(HKU)</strong>에서 AI 공학 학·석사 통합과정을 전액 장학금으로 공부하고 있는 공학도입니다. 한국에서 태어나 런던과 이스탄불에서 5년 반을 보냈고, 지금은 홍콩과 서울을 오가며 지냅니다."
+    en: "I'm an engineering student at the <strong>University of Hong Kong</strong>, majoring in Mechanical Engineering and pursuing the BEng X + MScEng in AI Engineering on a full scholarship. I grew up in South Korea, spent five and a half years between London and Istanbul, and now live between Hong Kong and Seoul.",
+    ko: "<strong>홍콩대학교(HKU)</strong>에서 기계공학을 전공하며 BEng X + MScEng(AI 공학) 과정을 전액 장학금으로 공부하고 있는 공학도입니다. 한국에서 태어나 런던과 이스탄불에서 5년 반을 보냈고, 지금은 홍콩과 서울을 오가며 지냅니다."
   },
   'about.p2': {
     en: "As a <strong>Laidlaw Scholar</strong>, I'm researching UAV-based analysis of urban atmospheric turbulence, and in Prof. Dong-Myeong Shin's lab I work on 3D-printed triboelectric nanogenerators for wearable sensing. Outside research, I build real hardware with the <strong>HKU Robocon</strong> and <strong>HKU Racing</strong> teams — designing, machining, and assembling parts that have to survive competition.",
@@ -47,8 +47,8 @@ window.I18N = {
   },
   'about.f1k': { en: 'Based in',  ko: '거점' },
   'about.f1v': { en: 'Hong Kong / Seoul', ko: '홍콩 · 서울' },
-  'about.f2k': { en: 'Studying',  ko: '전공' },
-  'about.f2v': { en: 'AI Engineering', ko: 'AI 공학' },
+  'about.f2k': { en: 'Majoring',  ko: '전공' },
+  'about.f2v': { en: 'Mechanical Engineering', ko: '기계공학' },
   'about.f3k': { en: 'Focus',     ko: '관심' },
   'about.f3v': { en: 'Robotics &amp; Applied AI', ko: '로보틱스 · 응용 AI' },
 

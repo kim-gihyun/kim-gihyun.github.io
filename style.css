@@ -316,6 +316,31 @@ html.dark .quick-links a.hi:hover { color: #08121d; }
 .callout.c2 { bottom: 16%; left: 0; }
 .callout.c2 .co-line { width: 1px; height: 44px; right: -20px; bottom: 100%; transform: rotate(-22deg); transform-origin: bottom; left: auto; }
 @media (max-width: 1100px) { .callout { display: none; } }
+/* leader lines that track a named part in 3D (set per-frame by viewer.js) */
+.model-stage .callout.tracking .co-line {
+  position: absolute; left: 0; top: 0; width: 0; height: 1.2px;
+  background: var(--accent); transform-origin: 0 50%;
+  opacity: 0; transition: opacity .3s ease;
+}
+.model-stage .callout.tracking .co-line::after {
+  content: ""; position: absolute; right: -3px; top: 50%; width: 5px; height: 5px;
+  margin-top: -2.5px; border-radius: 50%; background: var(--accent);
+}
+
+/* live 3D stages embedded in log posts */
+.post-stage {
+  position: relative; height: clamp(280px, 46vw, 400px); margin: 20px 0;
+  border: 1px solid var(--line); background: var(--surface); overflow: hidden; cursor: grab;
+}
+.post-stage:active { cursor: grabbing; }
+.post-stage::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
+  background-size: 22px 22px; opacity: .5;
+}
+.post-stage .robot-hint { text-align: left; left: 12px; right: auto; }
 
 /* section-cut control */
 .section-ctl {
@@ -544,11 +569,7 @@ html.dark .quick-links a.hi:hover { color: #08121d; }
   .ptiles { grid-template-columns: 1fr; }
   .ptile-stage { height: 230px; }
 }
-/* phones: the 3D viewer doesn't mount — show the CAD image, hide the loader */
-@media (max-width: 700px) {
-  .ptile-stage .robot-fallback { opacity: 1; }
-  .ptile-stage .model-loader { display: none; }
-}
+/* phones: models lazy-mount as cards scroll into view; loader shows until then */
 
 /* ---------- Project modal: full drawing sheet ---------- */
 .proj-modal {

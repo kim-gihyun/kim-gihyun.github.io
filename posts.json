@@ -5,5 +5,26 @@
     "date": "2026-05-15",
     "tags": ["personal"],
     "excerpt": "Why I built this site and what I plan to write about here."
+  },
+  {
+    "title": "RA Progress Report — 1",
+    "file": "2026-05-29-ra-progress-1.md",
+    "date": "2026-05-29",
+    "tags": ["research", "TENG"],
+    "excerpt": "A self-powered TENG input device: the BISNC interface that inspired it, where past approaches fall short, and a gyroid-substrate + C-TPU electrode proposal."
+  },
+  {
+    "title": "RA Progress Report — 2",
+    "file": "2026-06-05-ra-progress-2.md",
+    "date": "2026-06-05",
+    "tags": ["research", "TENG", "3D printing"],
+    "excerpt": "MATLAB-generated gyroid fabric meets a 2019 Prusa: a 33% print success rate, failure analysis under the microscope, and one bright spot — the electrode grid works."
+  },
+  {
+    "title": "RA Progress Report — 3",
+    "file": "2026-06-12-ra-progress-3.md",
+    "date": "2026-06-12",
+    "tags": ["research", "TENG", "CAD"],
+    "excerpt": "Pivoting to a TENG glove: C-TPU strain and creep behavior, the glove concept, and the 3D-printed tensile & bending testers I designed to characterize it — live models inside."
   }
 ]

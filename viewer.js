@@ -36,13 +36,22 @@ window.mountViewer = function (stage) {
   return handle;
 };
 
-// Auto-mount inline models. On small screens, skip project-card models
-// (avoids several live WebGL contexts on phones) — the CAD image shows instead.
-var smallScreen = window.matchMedia && window.matchMedia('(max-width: 700px)').matches;
-document.querySelectorAll('[data-model]').forEach(function (s) {
-  if (smallScreen && s.classList.contains('ptile-stage')) return;
-  window.mountViewer(s);
-});
+// Auto-mount inline models. Project-card models mount lazily as they
+// approach the viewport (works on mobile too, one context at a time);
+// hero/standalone stages mount immediately.
+(function () {
+  var lazyIO = ('IntersectionObserver' in window)
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { lazyIO.unobserve(e.target); window.mountViewer(e.target); }
+        });
+      }, { rootMargin: '250px' })
+    : null;
+  document.querySelectorAll('[data-model]').forEach(function (s) {
+    if (s.classList.contains('ptile-stage') && lazyIO) lazyIO.observe(s);
+    else window.mountViewer(s);
+  });
+})();
 
 function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
   const url = stage.getAttribute('data-model');
@@ -102,6 +111,8 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
   })();
   const clipPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1e6); // x <= c
   const wantIntro = stage.hasAttribute('data-wire-intro') && !reduced;
+  let trackers = [];                       // leader-line callouts that follow parts
+  const trackV = new THREE.Vector3();
 
   const material = new THREE.MeshStandardMaterial({
     color: 0x6c95c4, metalness: 0.7, roughness: 0.34, flatShading: true,
@@ -193,6 +204,25 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
       sectionCtl.classList.add('ready');
     }
 
+    // ---- tracking callouts: leader lines that follow named parts ----
+    stage.querySelectorAll('.callout[data-track]').forEach((co) => {
+      try {
+        const pat = new RegExp(co.getAttribute('data-track'), 'i');
+        const matches = parts.filter((p) => pat.test(p.name || ''));
+        if (!matches.length) return;
+        const box = new THREE.Box3();
+        matches.forEach((m) => box.union(new THREE.Box3().setFromObject(m)));
+        const cW = box.getCenter(new THREE.Vector3());
+        const anchor = new THREE.Object3D();
+        matches[0].parent.add(anchor);
+        anchor.position.copy(matches[0].parent.worldToLocal(cW.clone()));
+        let line = co.querySelector('.co-line');
+        if (!line) { line = document.createElement('span'); line.className = 'co-line'; co.appendChild(line); }
+        co.classList.add('tracking');
+        trackers.push({ co, line, anchor, label: co.querySelector('.co-label') });
+      } catch (e) {}
+    });
+
     // ---- exploded view (multi-part assemblies) ----
     if (multiPart && exCtl) try {
       spin.updateMatrixWorld(true);
@@ -267,6 +297,34 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
   function resize() { renderer.setSize(W(), H()); cam.aspect = W() / H(); cam.updateProjectionMatrix(); }
   window.addEventListener('resize', resize);
 
+  function updateTrackers() {
+    if (!trackers.length) return;
+    const sr = stage.getBoundingClientRect();
+    trackers.forEach((t) => {
+      t.anchor.getWorldPosition(trackV);
+      trackV.project(cam);
+      if (trackV.z > 1) { t.line.style.opacity = '0'; return; }
+      const tx = (trackV.x + 1) / 2 * sr.width;
+      const ty = (1 - trackV.y) / 2 * sr.height;
+      const lr = (t.label || t.co).getBoundingClientRect();
+      // leave from the label edge nearer the target
+      const lcx = (lr.left + lr.right) / 2 - sr.left;
+      const lx = (tx < lcx ? lr.left : lr.right) - sr.left;
+      const ly = (lr.top + lr.bottom) / 2 - sr.top;
+      // the callout div is positioned inside the stage; line coords are stage-relative
+      const cr = t.co.getBoundingClientRect();
+      const ox = cr.left - sr.left, oy = cr.top - sr.top;
+      const dx = tx - lx, dy = ty - ly;
+      const len = Math.hypot(dx, dy);
+      const ang = Math.atan2(dy, dx);
+      t.line.style.opacity = '1';
+      t.line.style.left = (lx - ox) + 'px';
+      t.line.style.top = (ly - oy) + 'px';
+      t.line.style.width = Math.max(0, len - 4) + 'px';
+      t.line.style.transform = 'rotate(' + ang + 'rad)';
+    });
+  }
+
   let rafId = 0, running = true;
   (function loop() {
     if (!running) return;
@@ -281,6 +339,7 @@ function initViewer(stage, THREE, gl, oc, env, dr, reduced) {
       controls.update();
     }
     renderer.render(scene, cam);
+    updateTrackers();
   })();
 
   return {
