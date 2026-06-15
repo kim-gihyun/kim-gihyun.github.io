@@ -66,9 +66,23 @@
     }
     paint(); themePainters.push(paint); langPainters.push(paint);
     btn.addEventListener('click', function () {
-      var dark = document.documentElement.classList.toggle('dark');
-      try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
-      themePainters.forEach(function (p) { p(); });
+      var apply = function () {
+        var dark = document.documentElement.classList.toggle('dark');
+        try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+        themePainters.forEach(function (p) { p(); });
+      };
+      // "Redraw" the sheet outward from the switch where supported.
+      if (reduced || !document.startViewTransition) { apply(); return; }
+      var root = document.documentElement;
+      var r = btn.getBoundingClientRect();
+      var x = r.left + r.width / 2, y = r.top + r.height / 2;
+      root.style.setProperty('--vt-x', x + 'px');
+      root.style.setProperty('--vt-y', y + 'px');
+      root.style.setProperty('--vt-r',
+        Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 'px');
+      root.classList.add('theme-vt');
+      var done = function () { root.classList.remove('theme-vt'); };
+      document.startViewTransition(apply).finished.then(done, done);
     });
   }
   document.querySelectorAll('.theme-btn').forEach(function (b) { wireTheme(b, false); });

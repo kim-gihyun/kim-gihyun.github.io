@@ -1021,3 +1021,93 @@ html.dark .xc-h, html.dark .xc-v { background: color-mix(in srgb, var(--accent) 
 }
 html.dark .dock { border-color: var(--line); box-shadow: 4px 4px 0 0 rgba(0,0,0,.35); }
 html.dark .dock-link.active { color: #08121d; }
+
+/* ============================================================
+   MOTION ENHANCEMENTS — rev. 2026
+   The drawing set comes alive, in its own language:
+     1. Navigating swaps the sheet on the table; the theme
+        switch redraws the sheet outward from the toggle.
+     2. Section dimension-lines measure themselves out on reveal.
+     3. Drafting registration ticks settle onto cards on hover.
+   Everything below is gated behind prefers-reduced-motion and
+   degrades cleanly where the View Transitions API is absent.
+   ============================================================ */
+
+/* ---- 1a. Cross-document navigation — swap the sheet ---- */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The fixed chrome is the drafting table: it holds still while
+     the sheet on it changes. Names are suppressed during a theme
+     toggle so the whole surface redraws as one piece. */
+  html:not(.theme-vt) .topbar      { view-transition-name: vt-topbar; }
+  html:not(.theme-vt) .dock        { view-transition-name: vt-dock; }
+  html:not(.theme-vt) .sheet-frame { view-transition-name: vt-frame; }
+  html:not(.theme-vt) .to-top      { view-transition-name: vt-totop; }
+
+  ::view-transition-old(root) { animation: vtSheetOut .30s cubic-bezier(.4,0,.2,1) both; }
+  ::view-transition-new(root) { animation: vtSheetIn  .42s cubic-bezier(.2,.8,.2,1) both; }
+
+  /* ---- 1b. Theme toggle — redraw from the switch outward ---- */
+  html.theme-vt::view-transition-old(root) { animation: none; }              /* old sheet holds beneath */
+  html.theme-vt::view-transition-new(root) { animation: vtThemeWipe .5s cubic-bezier(.3,.7,.2,1) both; }
+}
+
+@keyframes vtSheetOut { to   { opacity: 0; transform: translateY(-8px) scale(.992); } }
+@keyframes vtSheetIn  { from { opacity: 0; transform: translateY(10px); } }
+@keyframes vtThemeWipe {
+  from { clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 0)); }
+  to   { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 0)); }
+}
+
+/* Where view transitions run, the swap IS the page entrance, so the
+   generic per-page fade would double up — stand it down. Browsers
+   without the API keep the original pageEnter. */
+@supports (view-transition-name: none) {
+  main { animation: none; }
+}
+
+/* Reduced motion: every transition resolves instantly. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; mix-blend-mode: normal; }
+}
+
+/* ---- 2. Eyebrow rules + section dimension-lines draw themselves ---- */
+@media (prefers-reduced-motion: no-preference) {
+  /* home hero rule draws as the hello line settles in */
+  .landing .hello::before { transform-origin: left center; animation: ruleDraw .7s cubic-bezier(.2,.8,.2,1) .24s both; }
+  /* other pages: the page-head rule draws when it reveals */
+  .page-head.reveal .eyebrow::before { transform: scaleX(0); transform-origin: left center; transition: transform .6s cubic-bezier(.2,.8,.2,1) .1s; }
+  .page-head.reveal.in .eyebrow::before { transform: scaleX(1); }
+  /* section heading dimension-line measures out left-to-right */
+  .block.reveal h2::after { transform: scaleX(0); transform-origin: left center; transition: transform .9s cubic-bezier(.2,.8,.2,1) .12s; }
+  .block.reveal.in h2::after { transform: scaleX(1); }
+}
+@keyframes ruleDraw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ---- 3. Registration ticks settle onto cards on hover ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .role-card, .song { position: relative; }
+  .role-card::after, .song::after {
+    content: ""; position: absolute; top: 7px; right: 7px; z-index: 2;
+    width: 10px; height: 10px; pointer-events: none;
+    border-top: 1.5px solid var(--accent); border-right: 1.5px solid var(--accent);
+    opacity: 0; transform: translate(-4px, 4px);
+    transition: opacity .2s ease, transform .25s cubic-bezier(.2,.8,.2,1);
+  }
+  .role-card:hover::after, .role-card:focus-visible::after,
+  .song:hover::after, .song:focus-visible::after { opacity: .85; transform: none; }
+}
+
+/* ---- 4. Dock: the active sheet keeps a registration mark ---- */
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .dock-link { overflow: hidden; }
+  .dock-link.active::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--accent); animation: dockMark .5s cubic-bezier(.2,.8,.2,1) both;
+  }
+  html.dark .dock-link.active::before { background: #08121d; }
+}
+@keyframes dockMark { from { transform: scaleY(0); transform-origin: center; } to { transform: scaleY(1); } }
