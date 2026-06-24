@@ -128,14 +128,15 @@
   var finePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
   if (finePointer) {
     document.documentElement.classList.add('has-xcur');
+    var LITE = (window.devicePixelRatio || 1) > 1.25;
 
     var glow = document.createElement('div');
-    glow.className = 'grid-glow'; document.body.appendChild(glow);
+    glow.className = 'grid-glow'; if (!LITE) document.body.appendChild(glow);
 
     // halo of drafting crosses at grid intersections around the cursor
     var xf = document.createElement('canvas');
     xf.style.cssText = 'position:fixed;inset:0;z-index:-1;pointer-events:none;';
-    document.body.appendChild(xf);
+    if (!LITE) document.body.appendChild(xf);
     var xfCtx = xf.getContext('2d');
     var xfColor = '29,78,137';
     function xfTheme() {
@@ -146,6 +147,7 @@
     xfSize(); window.addEventListener('resize', xfSize);
     var XF_R = 170, GRID = 28;
     function xfDraw(cx, cy) {
+      if (LITE) return;
       xfCtx.clearRect(0, 0, xf.width, xf.height);
       if (cx < 0) return;
       var x0 = Math.max(0, Math.floor((cx - XF_R) / GRID) * GRID - 1);

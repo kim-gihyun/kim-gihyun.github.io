@@ -698,7 +698,7 @@ footer.titleblock { margin-top: 64px; padding: 0 0 40px; font-family: var(--mono
 }
 
 /* ---------- Home: work orders ---------- */
-.now-section { padding: 8px 0 40px; }
+.now-section { padding: 8px 28px 40px; }
 .now-head {
   font: 600 .68rem/1 var(--mono); letter-spacing: .2em;
   text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; margin: 0 0 14px;
