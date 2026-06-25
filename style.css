@@ -967,6 +967,8 @@ html.xcur-on .xcur > span { opacity: 1; }
 /* while locked, quiet the guides */
 .xcur.lock .xc-h, .xcur.lock .xc-v { opacity: .14; }
 .xcur.lock .xc-snap, .xcur.lock .xc-read { opacity: 0; }
+/* over text: hide only the X/Y coordinate readout, keep the crosshair */
+.xcur.on-text .xc-read { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .xc-snap, .xc-box { transition: none; } }
 
 /* cursor-following grid reveal (all pages, behind content) */

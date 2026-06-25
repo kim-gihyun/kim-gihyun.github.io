@@ -182,6 +182,10 @@
     var rootStyle = document.documentElement.style;
     var LOCK_SEL = 'a,button,.btn,.ptile,.role-card,.song,.fact,.tags span,.pf-btn,' +
       '.photo-slot,.gallery img,.theme-btn,.nav-toggle,input[type="range"],.now-card,.post-list li,tr[data-href]';
+    // text the readout should get out of the way of (non-interactive)
+    var TEXT_SEL = 'p,h1,h2,h3,h4,h5,h6,li,blockquote,figcaption,caption,td,th,dt,dd,' +
+      'label,em,strong,code,pre,summary,.role-name,.role-org,.now-label,.now-tag,' +
+      '.song-title,.song-artist,.ptile-title,.ptile-desc,.fig-label,.city-label,.tagline,.lede';
 
     function paint() {
       ticking = false;
@@ -220,6 +224,8 @@
       var t = e.target.closest ? e.target.closest(LOCK_SEL) : null;
       boxEl = t;
       xc.classList.toggle('lock', !!t);
+      // hide the X/Y readout over plain text (not just interactive elements)
+      xc.classList.toggle('on-text', !t && !!(e.target.closest && e.target.closest(TEXT_SEL)));
       queue();
     });
     window.addEventListener('scroll', function () { if (boxEl) queue(); }, { passive: true });
